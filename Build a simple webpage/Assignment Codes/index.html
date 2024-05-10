@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="src/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Module 2 Assignment</title>
+  </head>
+  <body>
+    <h1>Card Listing Page</h1>
+    <img class="banner" src="public/banner.jpeg" alt="banner" />
+
+    <div class="content-box">
+      <div class="dropdown-menu">
+        <label for="sort-dropdown"> Sort by: </label>
+        <select id="sort-dropdown">
+          <option value="ascending" selected>
+            Collector Number - Ascending
+          </option>
+          <option value="descending">Collector Number - Descending</option>
+        </select>
+      </div>
+
+      <div class="card-grid"></div>
+    </div>
+
+    <script type="module" src="./src/main.ts"></script>
+    <div id="badge"></div>
+  </body>
+</html>

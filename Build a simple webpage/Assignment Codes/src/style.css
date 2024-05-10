@@ -1,0 +1,84 @@
+/* Your styles here */
+
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  color: #fff;
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.banner {
+  width: 100%;
+}
+
+.content-box {
+  padding: 2rem;
+}
+
+.dropdown-menu {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-bottom: 1.5rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  padding-left: 4rem;
+  padding-right: 4rem;
+  border-top: 2px solid #333;
+}
+
+.card-box {
+  display: block;
+
+  /* background-color: #ddd; */
+
+  margin: 1rem;
+}
+
+.card-image-box {
+  display: flex;
+  justify-content: center;
+}
+
+.card-image {
+  max-width: 100%;
+}
+
+.set-collector {
+  color: #777;
+  font-size: smaller;
+}
+
+.card-name {
+  /* color: #000; */
+  font-size: large;
+}
+
+.card-description {
+  /* color: #000; */
+  font-size: medium;
+}
