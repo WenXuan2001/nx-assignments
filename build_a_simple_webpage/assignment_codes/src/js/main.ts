@@ -1,10 +1,18 @@
 import { insertBadge } from "./badge";
-import "./style.css";
+import "../css/style.css";
 import * as XLSX from "xlsx";
 
 insertBadge();
 
 // Your script here
+interface CardJson {
+  Image: string;
+  Set: string;
+  ["Collector Number"]: number;
+  Name: string;
+  Description: string;
+}
+
 interface CardData {
   img_link: string;
   set: string;
@@ -22,17 +30,17 @@ interface Card {
 }
 
 // pull excel data from a sheet
-const getData = async (url: string): Promise<unknown[]> => {
+const getData = async (url: string): Promise<CardJson[]> => {
   const res = await fetch(url);
   const data = await res.arrayBuffer();
 
   const workbook = XLSX.read(data);
-  const d = XLSX.utils.sheet_to_json(workbook.Sheets.Sheet1);
+  const d = XLSX.utils.sheet_to_json(workbook.Sheets.Sheet1) as CardJson[];
   return d;
 };
 
 // diy schema
-const parseJsonAsCard = (data: any): CardData => {
+const parseJsonAsCard = (data: CardJson): CardData => {
   return {
     img_link: data.Image,
     set: data.Set,
@@ -125,7 +133,7 @@ const createCardNode = (card: Card): HTMLDivElement => {
 };
 
 // sort functions
-const sortCardNodes = (cards: Card[], order: String): void => {
+const sortCardNodes = (cards: Card[], order: string): void => {
   // empty children of parent
   const card_grid = document.querySelector(".card-grid");
   card_grid?.replaceChildren();
@@ -135,10 +143,10 @@ const sortCardNodes = (cards: Card[], order: String): void => {
 
   switch (order) {
     case "ascending":
-      newCards = sortCardsAsc(cards);
+      newCards = sortCards(cards, order);
       break;
     case "descending":
-      newCards = sortCardsDesc(cards);
+      newCards = sortCards(cards, order);
       break;
   }
 
@@ -149,18 +157,21 @@ const sortCardNodes = (cards: Card[], order: String): void => {
   }
 };
 
-const sortCardsAsc = (cards: Card[]): Card[] => {
-  cards.sort((a, b) => {
-    return a.collector - b.collector;
-  });
-
-  return cards;
-};
-
-const sortCardsDesc = (cards: Card[]): Card[] => {
-  cards.sort((a, b) => {
-    return b.collector - a.collector;
-  });
+const sortCards = (cards: Card[], order: string): Card[] => {
+  switch (order) {
+    case "ascending":
+      cards.sort((a, b) => {
+        return a.collector - b.collector;
+      });
+      break;
+    case "descending":
+      cards.sort((a, b) => {
+        return b.collector - a.collector;
+      });
+      break;
+    default:
+      console.log("wrong order input");
+  }
 
   return cards;
 };
@@ -174,7 +185,7 @@ const cardArr: Card[] = dataArr.map((data) => {
   return card;
 });
 
-let sortedCardArr = sortCardsAsc(cardArr);
+let sortedCardArr = sortCards(cardArr, "ascending");
 
 sortedCardArr.map((card) => {
   return createCardNode(card);

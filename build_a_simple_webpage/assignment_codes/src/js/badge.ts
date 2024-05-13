@@ -1,5 +1,5 @@
-import typescriptLogo from "./typescript.svg";
-import "./badge.css";
+import typescriptLogo from "../typescript.svg";
+import "../css/badge.css";
 
 export function insertBadge() {
   const badge = document.querySelector<HTMLDivElement>("#badge");
